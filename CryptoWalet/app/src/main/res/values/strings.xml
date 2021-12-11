@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Wallet Cryptos</string>
+
+    <string name="quantity_invest">Valor investido</string>
+    <string name="register_buy">Cadastrar compra</string>
+    <string name="register_action">Cadastro de Ativos</string>
+    <string name="quantity_total">Valor total R$</string>
+    <string name="variations">Variação</string>
+
+    <string name="quantity_action">Quantidade comprada</string>
+    <string name="quantity_buy">Digite a quantidade desejada</string>
+    <string name="value_action">Valor atual do ativo</string>
+    <string name="net_check">Verifique sua conecção</string>
+
+    <string name="delete_icon">delete</string>
+    <string name="select_options_results">select_options</string>
+    <string name="alert_string">Aviso</string>
+    <string name="action_delete_success">Ativo removido com sucesso</string>
+    <string name="remove_action_question">Deseja realmente remover o ativo.</string>
+    <string name="blank_action_add">Nenhum ativo adicionado</string>
+    <string name="add_btn_new_action">new_action</string>
+    <string name="welcome_splsh_text">Bem vindo á sua carteira de criptomoedas</string>
+
+</resources>

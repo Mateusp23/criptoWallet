@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="10dp"
+    android:background="#fff">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardElevation="10dp"
+        app:cardCornerRadius="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_item">
+
+            <TextView
+                android:id="@+id/txtmoeda"
+                style="@style/actions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="bitcoins" />
+
+            <TextView
+                android:id="@+id/txt_codigo"
+                style="@style/actions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="BTC"
+                app:layout_constraintEnd_toStartOf="@+id/btn_delete"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
+
+            <ImageView
+                android:id="@+id/btn_delete"
+                android:layout_width="57dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintEnd_toStartOf="@+id/drop"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_delete"
+                android:contentDescription="@string/delete_icon" />
+
+            <View
+                android:id="@+id/view3"
+                android:layout_width="5dp"
+                android:layout_height="75dp"
+                android:layout_marginEnd="68dp"
+                android:background="#fff"
+                app:layout_constraintEnd_toEndOf="@+id/txt_codigo"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/drop"
+                android:layout_width="41dp"
+                android:layout_height="43dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/btn_delete"
+                app:srcCompat="@drawable/ic_select_options"
+                android:contentDescription="@string/select_options_results" />
+
+            <TextView
+                android:id="@+id/txt_quantidade"
+                style="@style/quantity_actions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="8dp"
+                android:text="TextView"
+                android:visibility="gone"
+                app:layout_constraintStart_toEndOf="@+id/view3"
+                app:layout_constraintTop_toBottomOf="@+id/txt_codigo" />
+
+            <TextView
+                android:id="@+id/txt_valor"
+                style="@style/quantity_actions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="8dp"
+                android:text="TextView"
+                android:visibility="gone"
+                app:layout_constraintStart_toEndOf="@+id/view3"
+                app:layout_constraintTop_toBottomOf="@+id/txt_quantidade" />
+
+            <TextView
+                android:id="@+id/txt_data"
+                style="@style/quantity_actions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="data"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/view3"
+                app:layout_constraintTop_toBottomOf="@+id/txt_valor" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
