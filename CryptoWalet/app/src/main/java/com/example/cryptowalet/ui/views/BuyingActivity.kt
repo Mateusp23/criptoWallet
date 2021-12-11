@@ -10,9 +10,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cryptowalet.repository.BuyDAO
 import com.example.cryptowalet.R
-import com.example.cryptowalet.service.CriptoBuyHTTP
+import com.example.cryptowalet.service.CryptoBuyHTTP
 import com.example.cryptowalet.models.Buy
-import com.example.cryptowalet.models.Criptos
+import com.example.cryptowalet.models.Crypto
 import com.example.cryptowalet.models.Name
 import kotlinx.android.synthetic.main.activity_buying.*
 import java.text.DateFormat
@@ -55,17 +55,17 @@ class BuyingActivity : AppCompatActivity() {
         FABSave.setOnClickListener {
             if (edtQtd.text.toString().toFloat() > 0) {
                 try {
-                    val verificacao = edtQtd.text.toString().toFloat()
+                    val check = edtQtd.text.toString().toFloat()
                     val dStr = getDate()
-                    val compra = Buy(
+                    val buy = Buy(
                         null,
                         buy?.name.toString(),
                         dStr.toString(),
                         edtQtd.text.toString().toDouble(),
                         valueT
                     )
-                    val compraDao = BuyDAO(this)
-                    compraDao.insert(compra)
+                    val buyDAO = BuyDAO(this)
+                    buyDAO.insert(buy)
                     onBackPressed()
                 } catch (e: Exception) {
                     alert()
@@ -95,7 +95,7 @@ class BuyingActivity : AppCompatActivity() {
 
     fun loadingData() {
         if (asyncTask == null) {
-            if (CriptoBuyHTTP.hasConnection(this)) {
+            if (CryptoBuyHTTP.hasConnection(this)) {
                 if (asyncTask?.status != AsyncTask.Status.RUNNING) {
                     asyncTask = StatesTask()
                     asyncTask?.execute()
@@ -105,7 +105,7 @@ class BuyingActivity : AppCompatActivity() {
     }
 
     @SuppressLint("StaticFieldLeak")
-    inner class StatesTask : AsyncTask<Void, Void, Criptos?>() {
+    inner class StatesTask : AsyncTask<Void, Void, Crypto?>() {
 
         override fun onPreExecute() {
             super.onPreExecute()
@@ -113,11 +113,11 @@ class BuyingActivity : AppCompatActivity() {
 
         @SuppressLint("WrongThread")
         @RequiresApi(Build.VERSION_CODES.O)
-        override fun doInBackground(vararg params: Void?): Criptos? {
-            return CriptoBuyHTTP.loadCripto(cod)
+        override fun doInBackground(vararg params: Void?): Crypto? {
+            return CryptoBuyHTTP.loadCrypto(cod)
         }
 
-        private fun update(result: Criptos?) {
+        private fun update(result: Crypto?) {
             val df = DecimalFormat("#0.00")
             if (result != null) {
                 valueT = result.buy.toDouble()
@@ -127,9 +127,9 @@ class BuyingActivity : AppCompatActivity() {
             asyncTask = null
         }
 
-        override fun onPostExecute(result: Criptos?) {
+        override fun onPostExecute(result: Crypto?) {
             super.onPostExecute(result)
-            update(result as Criptos?)
+            update(result as Crypto?)
         }
     }
 

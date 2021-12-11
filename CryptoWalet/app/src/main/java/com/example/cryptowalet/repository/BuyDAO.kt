@@ -16,13 +16,13 @@ class BuyDAO(context: Context) {
         val db = dbHelper.writableDatabase
         val contextValues = ContentValues()
 
-        contextValues.put(ID_COMPRA, buy.id)
-        contextValues.put(NOME_COMPRA, buy.name)
-        contextValues.put(DATA_COMPRA, buy.date)
-        contextValues.put(QTD_COMPRA, buy.quantity)
-        contextValues.put(VALOR_COMPRA, buy.value)
+        contextValues.put(ID_BUY, buy.id)
+        contextValues.put(NAME_BUY, buy.name)
+        contextValues.put(DATE_BUY, buy.date)
+        contextValues.put(QUANTITY_BUY, buy.quantity)
+        contextValues.put(BUY_VALUE, buy.value)
 
-        val respId = db.insert(TABELA_COMPRA, null, contextValues)
+        val respId = db.insert(TABLE_BUY, null, contextValues)
         val message = if (respId != -1L) {
             "Dados inseridos"
         } else {
@@ -33,9 +33,8 @@ class BuyDAO(context: Context) {
     }
 
     fun selectName(nome: String): ArrayList<Buy> {
-        Log.v("LOG", "GetAll")
         val db = dbHelper.writableDatabase
-        val sql = "SELECT * from $TABELA_COMPRA where $NOME_COMPRA like '%$nome%' "
+        val sql = "SELECT * from $TABLE_BUY where $NAME_BUY like '%$nome%' "
         Log.v("LOG", "" + sql)
         val index = db.rawQuery(sql, null)
         val buy = ArrayList<Buy>()
@@ -52,7 +51,7 @@ class BuyDAO(context: Context) {
     fun selectQuantity(nome: String): Double {
         Log.v("LOG", "GetAll")
         val db = dbHelper.writableDatabase
-        val sql = "SELECT * from $TABELA_COMPRA where $NOME_COMPRA like '%$nome%' "
+        val sql = "SELECT * from $TABLE_BUY where $NAME_BUY like '%$nome%' "
         Log.v("LOG", "" + sql)
         val index = db.rawQuery(sql, null)
         var quantity = 0.0
@@ -68,7 +67,7 @@ class BuyDAO(context: Context) {
     fun selectTotal(): Double {
         Log.v("LOG", "GetAll")
         val db = dbHelper.writableDatabase
-        val sql = "SELECT * from $TABELA_COMPRA"
+        val sql = "SELECT * from $TABLE_BUY"
         Log.v("LOG", "" + sql)
         val index = db.rawQuery(sql, null)
         val buy = ArrayList<Buy>()
@@ -87,7 +86,7 @@ class BuyDAO(context: Context) {
     fun selectValueInvest(nome: String): Double {
         Log.v("LOG", "GetAll")
         val db = dbHelper.writableDatabase
-        val sql = "SELECT * from $TABELA_COMPRA where $NOME_COMPRA like '%$nome%' "
+        val sql = "SELECT * from $TABLE_BUY where $NAME_BUY like '%$nome%' "
         Log.v("LOG", "" + sql)
         val index = db.rawQuery(sql, null)
         val buy = ArrayList<Buy>()
@@ -105,13 +104,13 @@ class BuyDAO(context: Context) {
 
     fun delete(buy: Buy): Int {
         val db = dbHelper.writableDatabase
-        return db.delete(TABELA_COMPRA, "id_compra =?", arrayOf(buy.id.toString()))
+        return db.delete(TABLE_BUY, "id_compra =?", arrayOf(buy.id.toString()))
     }
 
     fun selectSum(nome: String): Double {
         Log.v("LOG", "GetAll")
         val db = dbHelper.writableDatabase
-        val sql = "SELECT * from $TABELA_COMPRA where $NOME_COMPRA like '%$nome%' "
+        val sql = "SELECT * from $TABLE_BUY where $NAME_BUY like '%$nome%' "
         Log.v("LOG", "" + sql)
         val index = db.rawQuery(sql, null)
         val buy = ArrayList<Buy>()
@@ -128,11 +127,11 @@ class BuyDAO(context: Context) {
 
     @SuppressLint("Range")
     private fun buyIndex(cursor: Cursor): Buy {
-        val id = cursor.getInt(cursor.getColumnIndex(ID_COMPRA))
-        val name = cursor.getString(cursor.getColumnIndex(NOME_COMPRA))
-        val date = cursor.getString(cursor.getColumnIndex(DATA_COMPRA))
-        val quantity = cursor.getDouble(cursor.getColumnIndex(QTD_COMPRA))
-        val value = cursor.getDouble(cursor.getColumnIndex(VALOR_COMPRA))
+        val id = cursor.getInt(cursor.getColumnIndex(ID_BUY))
+        val name = cursor.getString(cursor.getColumnIndex(NAME_BUY))
+        val date = cursor.getString(cursor.getColumnIndex(DATE_BUY))
+        val quantity = cursor.getDouble(cursor.getColumnIndex(QUANTITY_BUY))
+        val value = cursor.getDouble(cursor.getColumnIndex(BUY_VALUE))
 
         return Buy(id, name, date, quantity, value)
     }

@@ -13,19 +13,19 @@ class DbHelper(context: Context) :
     SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
 
     override fun onCreate(db: SQLiteDatabase) {
-        val sql = "CREATE TABLE $TABELA_ATIVO($ID_COLUMN  INTEGER PRIMARY KEY " +
-                "AUTOINCREMENT, $NOME_COLUMN TEXT,$CODIGO_COLUMN TEXT, $QTD_COLUMN DOUBLE);"
+        val sql = "CREATE TABLE $TABLE_ACTION($ID_COLUMN  INTEGER PRIMARY KEY " +
+                "AUTOINCREMENT, $NAME_COLUMN TEXT,$COD_COLUMN TEXT, $QUANTITY_COLUMN DOUBLE);"
         db.execSQL(sql)
-        val sql2 = " CREATE TABLE $TABELA_COMPRA($ID_COMPRA INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "$NOME_COMPRA TEXT, $DATA_COMPRA TEXT, $QTD_COMPRA DOUBLE, $VALOR_COMPRA DOUBLE)"
+        val sql2 = " CREATE TABLE $TABLE_BUY($ID_BUY INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "$NAME_BUY TEXT, $DATE_BUY TEXT, $QUANTITY_BUY DOUBLE, $BUY_VALUE DOUBLE)"
         db.execSQL(sql2)
 
         Log.e("LOG", "Criando")
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        db.execSQL("DROP TABLE IF EXISTS $TABELA_ATIVO")
-        db.execSQL("DROP TABLE IF EXISTS $TABELA_COMPRA")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_ACTION")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_BUY")
         onCreate(db)
     }
 }

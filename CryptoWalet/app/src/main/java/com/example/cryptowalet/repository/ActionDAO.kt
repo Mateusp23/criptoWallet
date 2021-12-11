@@ -17,11 +17,11 @@ class ActionDAO(context: Context) {
         val contextValues = ContentValues()
 
         contextValues.put(ID_COLUMN, action.id)
-        contextValues.put(NOME_COLUMN, action.name)
-        contextValues.put(CODIGO_COLUMN, action.cod)
-        contextValues.put(QTD_COLUMN, action.quantity)
+        contextValues.put(NAME_COLUMN, action.name)
+        contextValues.put(COD_COLUMN, action.cod)
+        contextValues.put(QUANTITY_COLUMN, action.quantity)
 
-        val respId = db.insert(TABELA_ATIVO, null, contextValues)
+        val respId = db.insert(TABLE_ACTION, null, contextValues)
         val message = if (respId != -1L) {
             "Dados inseridos"
         } else {
@@ -33,13 +33,12 @@ class ActionDAO(context: Context) {
 
     fun delete(action: Action): Int {
         val db = dbHelper.writableDatabase
-        return db.delete(TABELA_ATIVO, "id_ativos =?", arrayOf(action.id.toString()))
+        return db.delete(TABLE_ACTION, "id_ativos =?", arrayOf(action.id.toString()))
     }
 
     fun select(): ArrayList<Action> {
-        Log.v("LOG", "GetAll")
         val db = dbHelper.writableDatabase
-        val sql = "SELECT * from $TABELA_ATIVO"
+        val sql = "SELECT * from $TABLE_ACTION"
         val index = db.rawQuery(sql, null)
         val action = ArrayList<Action>()
         while (index.moveToNext()) {
@@ -56,7 +55,7 @@ class ActionDAO(context: Context) {
         val db = dbHelper.writableDatabase
         var id = 0
 
-        val sql = "SELECT * from $TABELA_ATIVO"
+        val sql = "SELECT * from $TABLE_ACTION"
         val index = db.rawQuery(sql, null)
         val action = ArrayList<Action>()
         while (index.moveToNext()) {
@@ -75,9 +74,9 @@ class ActionDAO(context: Context) {
     @SuppressLint("Range")
     private fun actionIndex(cursor: Cursor): Action {
         val id = cursor.getInt(cursor.getColumnIndex(ID_COLUMN))
-        val cod = cursor.getString(cursor.getColumnIndex(CODIGO_COLUMN))
-        val name = cursor.getString(cursor.getColumnIndex(NOME_COLUMN))
-        val quantity = cursor.getDouble(cursor.getColumnIndex(QTD_COLUMN))
+        val cod = cursor.getString(cursor.getColumnIndex(COD_COLUMN))
+        val name = cursor.getString(cursor.getColumnIndex(NAME_COLUMN))
+        val quantity = cursor.getDouble(cursor.getColumnIndex(QUANTITY_COLUMN))
 
         return Action(id, name, cod, quantity)
     }

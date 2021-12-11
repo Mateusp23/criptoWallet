@@ -29,9 +29,9 @@ class BuyActivity: AppCompatActivity() {
         name = action?.name.toString()
 
         fab_add.setOnClickListener(View.OnClickListener {
-            val enviarNome = Name(action?.name)
+            val sendName = Name(action?.name)
             val it = Intent(this, BuyingActivity::class.java)
-            it.putExtra("nomeAtivo", enviarNome)
+            it.putExtra("nomeAtivo", sendName)
             startActivity(it)
         })
         initRecyclerView()
@@ -46,11 +46,11 @@ class BuyActivity: AppCompatActivity() {
     }
 
     private fun update() {
-        val compraDao = BuyDAO(this)
+        val buyDAO = BuyDAO(this)
         actionsList.clear()
-        actionsList = compraDao.selectName(name)
+        actionsList = buyDAO.selectName(name)
         txt_codigo.text =
-            resources.getString(R.string.quantity_action) + " = " + compraDao.selectSum(name).toString()
+            resources.getString(R.string.quantity_action) + " = " + buyDAO.selectSum(name).toString()
 
         if (actionsList.isEmpty()) {
             rv_dados.visibility = View.GONE

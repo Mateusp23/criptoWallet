@@ -35,9 +35,7 @@ class ActionAdapter(private val actions: List<Action>) :
         return vh
     }
 
-    override fun getItemCount(): Int {
-        return actions.size
-    }
+    override fun getItemCount() = actions.size
 
     override fun onBindViewHolder(holder: VH, position: Int) {
         val actions = actions[position]
@@ -80,7 +78,7 @@ class ActionAdapter(private val actions: List<Action>) :
             if (!showItens) {
 
                 holder.txt_quantidade.visibility = View.VISIBLE
-                holder.txt_quantidade.text = "Quantidade = " + qtd.toString()
+                holder.txt_quantidade.text = "Quantidade = $qtd"
                 holder.txt_valor.visibility = View.VISIBLE
                 holder.txt_valor.text = "Valor investido = " + df.format(valor)
 

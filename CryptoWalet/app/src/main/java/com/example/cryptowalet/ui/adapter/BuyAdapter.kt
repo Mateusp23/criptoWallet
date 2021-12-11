@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.action_item.view.txtmoeda
 import kotlinx.android.synthetic.main.buy_action_item.view.*
 import java.text.DecimalFormat
 
-class BuyAdapter(private val ativos: List<Buy>) :
+class BuyAdapter(private val actions: List<Buy>) :
     RecyclerView.Adapter<BuyAdapter.VH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
@@ -32,32 +32,30 @@ class BuyAdapter(private val ativos: List<Buy>) :
         return vh
     }
 
-    override fun getItemCount() = ativos.size
+    override fun getItemCount() = actions.size
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        Log.v("LOG", "ViewHolder")
-        val ativo = ativos[position]
-        var mostrarItens = false
+        val action = actions[position]
+        var showItens = false
 
         holder.btn_drop.setOnClickListener {
             val df = DecimalFormat("#0.00")
-            val compraDao = BuyDAO(it.context)
-            val qtd = compraDao.selectQuantity(ativo.name.toString())
-            val valor = compraDao.selectValueInvest(ativo.name.toString())
-            if (!mostrarItens) {
-
+            val buyDAO = BuyDAO(it.context)
+            val qtd = buyDAO.selectQuantity(action.name.toString())
+            val value = buyDAO.selectValueInvest(action.name.toString())
+            if (!showItens) {
                 holder.txt_quantidade.visibility = View.VISIBLE
                 holder.txt_quantidade.text = "Quantidade = $qtd"
-                holder.txt_valor.setVisibility(View.VISIBLE)
-                holder.txt_valor.text = "Valor investido = " + df.format(valor)
-                holder.txt_data.setVisibility(View.VISIBLE)
-                holder.txt_data.text = "Data  da compra: " + ativo.date
+                holder.txt_valor.visibility = View.VISIBLE
+                holder.txt_valor.text = "Valor investido = " + df.format(value)
+                holder.txt_data.visibility = View.VISIBLE
+                holder.txt_data.text = "Data  da compra: " + action.date
 
                 val layoutParams =
                     holder.barra.layoutParams
                 layoutParams.height = 430
                 holder.barra.setLayoutParams(layoutParams);
-                mostrarItens = true
+                showItens = true
             } else {
                 holder.txt_quantidade.visibility = View.GONE
                 holder.txt_valor.visibility = View.GONE
@@ -66,13 +64,13 @@ class BuyAdapter(private val ativos: List<Buy>) :
                     holder.barra.layoutParams
                 layoutParams.height = 210
                 holder.barra.layoutParams = layoutParams
-                mostrarItens = false
+                showItens = false
             }
         }
 
         holder.btn_delete.setOnClickListener(View.OnClickListener {
             val buyDAO = BuyDAO(it.context)
-            val action = ativos[position]
+            val action = actions[position]
             val alert =
                 AlertDialog.Builder(it.context)
             alert.setTitle("AVISO")
@@ -98,8 +96,8 @@ class BuyAdapter(private val ativos: List<Buy>) :
             val alertDialog = alert.create()
             alertDialog.show()
         })
-        holder.txt_moeda.text = ativo.name.toString()
-        holder.txt_data.text = ativo.date
+        holder.txt_moeda.text = action.name.toString()
+        holder.txt_data.text = action.date
     }
 
     class VH(itemView: View) : RecyclerView.ViewHolder(itemView) {

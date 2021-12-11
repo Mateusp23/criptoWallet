@@ -17,9 +17,9 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cryptowalet.*
-import com.example.cryptowalet.service.CriptoHTTP
+import com.example.cryptowalet.service.CryptoHTTP
 import com.example.cryptowalet.models.Action
-import com.example.cryptowalet.models.Criptos
+import com.example.cryptowalet.models.Crypto
 import com.example.cryptowalet.repository.ActionDAO
 import com.example.cryptowalet.repository.BuyDAO
 import com.example.cryptowalet.ui.adapter.ActionAdapter
@@ -120,7 +120,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadingData() {
         if (asyncTask == null) {
-            if (CriptoHTTP.hasConnection(this)) {
+            if (CryptoHTTP.hasConnection(this)) {
                 if (asyncTask?.status != AsyncTask.Status.RUNNING) {
                     asyncTask = StatesTask()
                     asyncTask?.execute()
@@ -135,7 +135,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     @SuppressLint("StaticFieldLeak")
-    inner class StatesTask : AsyncTask<Void, Void, ArrayList<Criptos>?>() {
+    inner class StatesTask : AsyncTask<Void, Void, ArrayList<Crypto>?>() {
 
         override fun onPreExecute() {
             super.onPreExecute()
@@ -143,11 +143,11 @@ class MainActivity : AppCompatActivity() {
 
         @SuppressLint("WrongThread")
         @RequiresApi(Build.VERSION_CODES.O)
-        override fun doInBackground(vararg params: Void?): ArrayList<Criptos>? {
-            return CriptoHTTP.loadCriptos()
+        override fun doInBackground(vararg params: Void?): ArrayList<Crypto>? {
+            return CryptoHTTP.loadCryptos()
         }
 
-        private fun update(result: ArrayList<Criptos>?) {
+        private fun update(result: ArrayList<Crypto>?) {
             val df = DecimalFormat("#0.00")
             if (result != null) {
 
@@ -190,10 +190,10 @@ class MainActivity : AppCompatActivity() {
             asyncTask = null
         }
 
-        override fun onPostExecute(result: ArrayList<Criptos>?) {
+        override fun onPostExecute(result: ArrayList<Crypto>?) {
             super.onPostExecute(result)
             if (result != null) {
-                update(result as ArrayList<Criptos>)
+                update(result as ArrayList<Crypto>)
             } else {
                 img_net_check.visibility = View.VISIBLE
                 txt_net_check.visibility = View.VISIBLE
