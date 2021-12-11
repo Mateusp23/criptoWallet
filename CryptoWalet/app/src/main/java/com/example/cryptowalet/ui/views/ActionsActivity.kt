@@ -56,7 +56,7 @@ class ActionsActivity : AppCompatActivity() {
         }
     }
 
-    fun checkId() {
+    private fun checkId() {
         val action = Action(idSelected, name, cod, quantity)
         val actionDAO = ActionDAO(this)
         val checkingID = actionDAO.findId(idSelected)

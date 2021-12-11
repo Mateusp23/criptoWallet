@@ -54,7 +54,7 @@ class BuyAdapter(private val actions: List<Buy>) :
                 val layoutParams =
                     holder.barra.layoutParams
                 layoutParams.height = 430
-                holder.barra.setLayoutParams(layoutParams);
+                holder.barra.layoutParams = layoutParams;
                 showItens = true
             } else {
                 holder.txt_quantidade.visibility = View.GONE

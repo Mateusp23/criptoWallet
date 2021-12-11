@@ -76,7 +76,7 @@ class BuyingActivity : AppCompatActivity() {
         }
     }
 
-    fun alert() {
+    private fun alert() {
         val alert =
             AlertDialog.Builder(this@BuyingActivity)
         alert.setTitle("Aviso")
@@ -93,7 +93,7 @@ class BuyingActivity : AppCompatActivity() {
         alertDialog.show()
     }
 
-    fun loadingData() {
+    private fun loadingData() {
         if (asyncTask == null) {
             if (CryptoBuyHTTP.hasConnection(this)) {
                 if (asyncTask?.status != AsyncTask.Status.RUNNING) {

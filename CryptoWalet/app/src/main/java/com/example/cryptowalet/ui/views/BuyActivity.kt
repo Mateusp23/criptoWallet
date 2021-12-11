@@ -38,7 +38,6 @@ class BuyActivity: AppCompatActivity() {
     }
 
     private fun initRecyclerView() {
-        Log.v("LOG", "Inicia RecyclerView")
         val adapter2 = BuyAdapter(actionsList)
         rv_dados.adapter = adapter2
         val layout = LinearLayoutManager(this)
